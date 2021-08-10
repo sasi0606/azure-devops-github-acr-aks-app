@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: sasiazuredevopsgithubacraksapp 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sasiazuredevopsgithubacraksapp
+  template:
+    metadata:
+      labels:
+        app: sasiazuredevopsgithubacraksapp 
+    spec:
+      containers:
+        - name: sasiazuredevopsgithubacraksapp 
+          image: aksdevopsacr9.azurecr.io/sasiazuredevopsgithubacraksapp
+          ports:
+          - containerPort: 80
