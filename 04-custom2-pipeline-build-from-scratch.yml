@@ -10,24 +10,27 @@ trigger:
 
 # Variables
 variables:
-  tag: '$(Build.BuildId)'stages:
-#Build Stage
+  tag: '$(Build.BuildId)'
+
+stages:
+# Build Stage 
 - stage: Build
-  displayName: Build stage 
-  jobs: 
+  displayName: Build Stage
+  jobs:
   - job: Build
-  displayName: Build Job
-  pool:
+    displayName: Build Job
+    pool:
       vmImage: 'ubuntu-latest'
-  steps
-  # Task-1: Build Docker Image and push to Azure Container Registry ACR
-  - task: Docker@2
-    inputs:
-      containerRegistry: 'manual-aksdevopsacr-svc'
-      repository: 'custom2aksnginxapp1'
-      command: 'buildAndPush'
-      Dockerfile: '**/Dockerfile'
-      Tags: |
+    steps: 
+
+    # Task-1: Build Docker Image and push to Azure Container Registry ACR
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'manual-aksdevopsacr-svc'
+        repository: 'custom2aksnginxapp1'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: |
           $(tag)
           $(Build.SourceVersion)
 ## Publish Artifacts pipeline code in addition to Build and Push          
